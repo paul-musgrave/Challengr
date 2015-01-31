@@ -11,9 +11,9 @@ if(kik && !kik.getUser){
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
-  .controller('PBChallengesCtrl', ['$scope', '$location', 'publicChallengeList', 'fbutil', function($scope, $location, publicChallengeList, fbutil) {
+  .controller('PBChallengesCtrl', ['$scope', '$timeout', '$location', 'publicChallengeList', 'fbutil', function($scope, $timeout, $location, publicChallengeList, fbutil) {
     
-    checkForRedirectMessage($location, $scope);
+    checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
@@ -135,9 +135,9 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   }])
 
   // --- 
-  .controller('HomeCtrl', ['$scope', '$location', 'fbutil', 'user', 'FBURL', function($scope, $location, fbutil, user, FBURL) {
+  .controller('HomeCtrl', ['$scope', '$timeout', '$location', 'fbutil', 'user', 'FBURL', function($scope, $timeout, $location, fbutil, user, FBURL) {
     
-    checkForRedirectMessage($location, $scope);
+    checkForRedirectMessage($location, $scope, $timeout);
 
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
@@ -256,16 +256,16 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   ]);
 
 // ## EXTREME HACK
-function checkForRedirectMessage($location, $scope){
+function checkForRedirectMessage($location, $scope, $timeout){
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
-      setTimeout(function(){
+      $timeout(function(){
         console.log('t');
         kik.message.followed = true;
         
         $location.path(kik.message.redirectTo);
-        $scope.$apply();
-      }, 10000);
+        // $scope.$apply();
+      }, 0);
     }
   }
 }
