@@ -18,6 +18,7 @@
 				  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder" style="width:250px;">
 				</div>
 				<br />
+				<canvas id="mycanvas" width="320" height="240"></canvas>
 				<video style="display:none;margin: 0 auto;" id = "video_view" width="320" height="240" controls>
 				</video>
 
@@ -66,19 +67,34 @@
 	
 	$(function(){
 		
+
 		$('#video_file').change(function() {
 		  $("#video_form").submit();
 		});
 
     $('#video_frame').load(function(){
 			window.video_url = $('#video_frame').contents().find("body").html();
-			$('#video_view').css("display", "block");
-			var video = document.getElementById('video_view');
+
+			var video  = document.getElementById('video_view');
 			var source = document.createElement('source');
+			var canvas = document.getElementById('mycanvas');
 
 			source.setAttribute('src', window.video_url);
 			video.appendChild(source);
-			video.play();
+			
+			video.addEventListener('canplay', function() {
+			    this.currentTime = this.duration / 2;
+			}, false);
+
+			video.addEventListener('seeked', function() {
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(video,0,0,320,240);
+				window.thumbnail = canvas.toDataURL("image/jpg");
+			}, false);
+
+
+
+
 
     });
 	});

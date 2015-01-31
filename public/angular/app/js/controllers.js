@@ -70,6 +70,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       response.upvotes = 0;
       response.submittedAt = +new Date();
       response.videoUrl = window.video_url || 'no video';
+      response.thumbUrl = window.thumbnail || 'no thumbnail';
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -105,13 +106,15 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
       challengeData.videoUrl = window.video_url;
+      challengeData.thumbUrl = window.thumbnail;
+
       // ## for now, just do this kikwise
       kik.getUser(function(user){
         // ## should do this, but for debug purposes don't
         // if(!user){
         //   alert('You need to login to submit a challenge!');
         // } else {
-          challengeData.submittedBy = user.username;
+          // challengeData.author = user.username ;
 
           publicChallengesRef.push(challengeData, function(){
             ///TODO
