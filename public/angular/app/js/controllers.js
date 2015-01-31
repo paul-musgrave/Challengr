@@ -19,6 +19,37 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     }
   }])
 
+  .controller('ResponseCtrl', ['$scope', '$routeParams', 'fbutil', function($scope, $routeParams, fbutil) {
+    // ## always public
+    var responsesRef = fbutil.ref('public-challenges/'+$routeParams[challengeId]+'/responses');
+
+    $scope.newresponse = {};
+
+    $scope.createResponse = function(response){
+      //TODO: validation (on form with angular somehow?)
+
+      // TODO: video. also thumbnail
+
+      response.upvotes = 0;
+      response.submittedAt = +new Date();
+
+      // ## for now, just do this kikwise
+      kik.getUser(function(user){
+        // ## should do this, but for debug purposes don't
+        // if(!user){
+        //   alert('You need to login to submit a challenge!');
+        // } else {
+          response.submittedBy = user.username;
+
+          publicChallengesRef.push(response, function(){
+            ///TODO
+            console.log('submitted!');
+            $location.path('/public-challenges');
+          });
+        // }
+      });
+  }])
+
   .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
     // ## always public
     var publicChallengesRef = fbutil.ref('public-challenges');

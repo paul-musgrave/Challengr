@@ -15,6 +15,11 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
       controller: 'ChallengeCreateCtrl'
     },
 
+    '/challenge/:challengeId/respond': {
+      templateUrl: 'partials/create-response.html',
+      controller: 'ResponseCtrl'
+    },
+
     /// ----
     '/home': {
       templateUrl: 'partials/home.html',
