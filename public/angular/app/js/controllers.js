@@ -4,13 +4,19 @@
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
-  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', function($scope, publicChallengeList) {
+  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', 'fbutil', function($scope, publicChallengeList, fbutil) {
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
     //     $scope.messages.$add({text: newMessage});
     //   }
     // };
+    $scope.upvote = function(challengeId){
+      var challenge = fbutil.ref('public-challenges').child(challengeId);
+      challenge.child('upvotes').transaction(function(curUpvotes){
+        return curUpvotes+1;
+      });
+    }
   }])
 
   .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
