@@ -16,32 +16,62 @@
   <script src="js/bootstrap.min.js"></script>
 </head>
 <body ng-cloak>
-  <nav class="navbar navbar-default navbar-fixed-top">
-   <div class="container-fluid">
-    <a type="button" href="#/public-challenges" class="btn btn-primary navbar-btn">Public</a>
-    <a type="button" href="#/create-challenge" class="btn btn-primary navbar-btn">Create</a>
-    <a type="button" class="btn btn-primary navbar-btn">Current Challenges</a>
-   </div>
+  <nav class="navbar navbar-default navbar-fixed-top" style="opacity:0.75;">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Challengr</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="">
+            <a type="button" href="#/public-challenges" class="btn btn-primary navbar-btn">Public</a>
+          </li>
+          <li>
+            <a type="button" href="#/create-challenge" class="btn btn-primary navbar-btn">Create</a>
+          </li>
+          <li>
+            <a type="button" class="btn btn-primary navbar-btn">Current Challenges</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
+
+ 
   <div class="banner">
-    
   </div>
 
   <style>
     body {
       margin: 0px;
-      background: url(img/pattern.png)
+      background: url(img/pattern.png);
+    }
+    .banner {
+      background: url(img/challengr_background2.jpg);
+      background-size: cover;
+      background-position: bottom;
+      height:250px;
+      width: 100%;
     }
   </style>
 
-  <ul class="menu">
+<!--   <ul class="menu">
     <li><a href="#/home">home</a></li>
     <li><a href="#/chat">chat</a></li>
     <li><a href="#/public-challenges">public challenges</a></li>
     <li><a href="#/create-challenge">create challenge</a></li>
     <li ng-hide-auth><a href="#/login">login</a></li>
     <li ng-show-auth><a href="#/account">account</a></li>
-  </ul>
+  </ul> -->
 
   <div ng-view></div>
 
