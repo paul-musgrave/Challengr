@@ -22,7 +22,12 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
     $scope.createChallenge = function(challengeData){
       //TODO: validation (on form with angular somehow?)
-      //TODO: attach current date
+
+      // TODO: video. also thumbnail
+
+      challengeData.upvotes = 0;
+      challengeData.startDate = +new Date();
+
       publicChallengesRef.push(challengeData, function(){
         ///TODO
         console.log('submitted!');
