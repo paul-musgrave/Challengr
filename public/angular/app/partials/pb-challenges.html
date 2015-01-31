@@ -2,7 +2,14 @@
 
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
 <ul id="pb-challenges" ng-show="publicc.length">
-    <li ng-repeat="challenge in publicc">{{challenge.name}}</li>
+    <li ng-repeat="challenge in publicc">
+        {{challenge.name}}
+        <img src="{{challenge.thumbUrl}}" alt="">
+        <ul>
+            <li>{{challenge.startDate}}</li>
+            <li>Upvotes: {{challenge.upvotes}}</li>
+        </ul>
+    </li>
 </ul>
 
 <!-- todo: create -->
