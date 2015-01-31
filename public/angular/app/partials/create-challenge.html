@@ -92,18 +92,16 @@
 			// 	window.thumbnail = mycanvas.toDataURL("image/jpg");
 			// });
 
-			video.addEventListener('loadeddata',function() {
-				video.currentTime = video.duration / 2;
-				video.play();
-				video.pause();
-				alert("loaded data");
-				setTimeout(function() {
-					alert("drawing data");
-				  var ctx = mycanvas.getContext('2d');
-				  ctx.drawImage(video,0,0,320,240);
-				  window.thumbnail = mycanvas.toDataURL("image/jpg");
-				}, 100);
-			});
+			video.currentTime = video.duration / 2;
+			video.play();
+			video.pause();
+			alert("loaded data");
+			setTimeout(function() {
+				alert("drawing data");
+			  var ctx = mycanvas.getContext('2d');
+			  ctx.drawImage(video,0,0,320,240);
+			  window.thumbnail = mycanvas.toDataURL("image/jpg");
+			}, 100);
 
 
 			// setTimeout(function() {
