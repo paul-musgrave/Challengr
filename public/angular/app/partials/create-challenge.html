@@ -1,6 +1,28 @@
 <h2>Create Challenge</h2>
 
+<form accept-charset="UTF-8" action="/challengr/post_video" data-remote="true" enctype="multipart/form-data" id="video_form" method="post" target="myiframe">
+	<div style="display:none">
+		<input name="utf8" type="hidden" value="✓">
+	</div>
+	Capture Video:
+  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder">
+  <input name="commit" type="submit" value="Save Video">
+</form>
+
+<iframe name="myiframe" id="video_frame" style="display:none;"></iframe>
+
+
 <form novalidate>
     Name: <input type="text" ng-model="newchallenge.name" /><br />
     <input type="submit" ng-click="createChallenge(newchallenge)" value="Create" />
 </form>
+
+<script>
+	
+	$(function(){
+    $('#video_frame').load(function(){
+			window.video_url = $('#video_frame').contents().find("body").html();
+    });
+	});
+
+</script>

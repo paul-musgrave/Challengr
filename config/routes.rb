@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   get 'challengr/index'
   post 'challengr/post_video'
+  
   root 'challengr#index'
 
   # Example of regular route:

@@ -6,9 +6,16 @@ class ChallengrController < ApplicationController
 	end
 
 	def post_video
+		base_uri = 'https://kik-hack-challengr.firebaseio.com/'
+		firebase = Firebase::Client.new(base_uri)
+
+		# respone = firebase.update(path, data)
+		# response = firebase.push("todos", { :name => 'Pick the milk', :priority => 1 })
+
 		# Post the video using PaperClip and return the public url
 		video = VideoStorage.new
 		video.file = params[:video][:file]
+
 		begin video.save!
 			render text: video.file.url
 		rescue
