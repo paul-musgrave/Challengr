@@ -74,7 +74,7 @@
 
     $('#video_frame').load(function(){
 			window.video_url = $('#video_frame').contents().find("body").html();
-
+			alert("Loading video");
 			var video  = document.getElementById('video_view');
 			var source = document.createElement('source');
 			var canvas = document.getElementById('mycanvas');
