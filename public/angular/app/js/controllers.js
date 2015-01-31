@@ -259,8 +259,10 @@ function checkForRedirectMessage($location){
 
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
-      kik.message.followed = true;
-      $location.path(kik.message.redirectTo);
+      setTimeout(function(){
+        kik.message.followed = true;
+        $location.path(kik.message.redirectTo);
+      }, 1000);
     }
   }
 }
