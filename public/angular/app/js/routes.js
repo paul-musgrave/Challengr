@@ -95,7 +95,8 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
       }
     });
     // routes which are not in our map are redirected to /home
-    $routeProvider.otherwise({redirectTo: '/home'});
+    // changed the default route to the public view
+    $routeProvider.otherwise({redirectTo: '/public-challenges'});
   }])
 
   /**

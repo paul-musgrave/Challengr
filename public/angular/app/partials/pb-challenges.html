@@ -10,10 +10,8 @@
 		  </div>
 		  <div class="panel-body">
 	        <!-- <img src="{{challenge.thumbUrl}}" alt=""> -->
-	        <!-- <div class="video_cover" id="video_{{challenge.name}}">
-	        </div> -->
-	        <div style="margin-left:-30px;">
-		        <video class = "card_video" name="video_{{challenge.name}}" style="margin: 0 auto;" width="220" onclick="this.play();" height="120">
+	        <div class = "video_cover">
+		        <video class = "card_video" width="220" style="margin-left:-30px;" onclick="this.play();" height="120">
 		        	 <source src="{{challenge.videoUrl}}" />
 						</video>
 					</div>
@@ -27,18 +25,12 @@
 
 <style>
 	.video_cover {
-		pointer-events: none;
-		background: url(https://openclipart.org/image/300px/svg_to_png/188943/playbuttonclear.png);
 		background-size: contain;
 		background-position: center;
-		opacity: 0.5;
 		border: 1px solid #d1d1d1;
+		border-radius: 8px;
 		width: 220px;
-		height: 120px;
 		margin: 0 auto;
-		position: relative;
-		top:120px;
-		z-index: 1000;
 		background-repeat: no-repeat;
 	}
 </style>

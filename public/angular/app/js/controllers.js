@@ -75,7 +75,6 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       response.upvotes = 0;
       response.submittedAt = +new Date();
       response.videoUrl = window.video_url || 'no video';
-      response.thumbUrl = window.thumbnail || 'no thumbnail';
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){

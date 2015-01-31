@@ -1,24 +1,76 @@
-<h2>Submit your Response!</h2>
-
-<form accept-charset="UTF-8" action="/challengr/post_video" data-remote="true" enctype="multipart/form-data" id="video_form" method="post" target="myiframe">
-    <div style="display:none">
-        <input name="utf8" type="hidden" value="✓">
+<div style="padding: 0px 20px;">
+  <div class="panel panel-default" style="margin-top:-150px;">
+    <div class="panel-heading">
+      <h3 class="panel-title"style="text-align:center;">Submit your Response!</h3>
     </div>
-    Capture Video:
-  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder">
-  <input name="commit" type="submit" value="Save Video">
+    <div class="panel-body" style="margin: 0 auto;text-align:center;">
+      <form accept-charset="UTF-8" action="/challengr/post_video" data-remote="true" enctype="multipart/form-data" id="video_form_respond" method="post" target="myiframe_respond">
 
-  <input type="submit" ng-click="createResponse(newresponse)" value="Create" />
-</form>
+        <div style="display:none">
+          <input name="utf8" type="hidden" value="✓">
+        </div>
 
-<iframe name="myiframe" id="video_frame" style="display:none;"></iframe>
+        <div class="fileUpload btn btn-default">
+          <span>Record Video</span>
+          <input id="video_file_respond" name="video[file]" type="file" accept="video/*;capture=camcorder" style="width:250px;">
+        </div>
+        <br />
+        <video style="display:none;margin: 0 auto;" id = "video_view_respond" width="220" height="120">
+        </video>
+
+        <br />
+        
+        <input name="commit" type="submit" value="Save Video" id="attatchVidButton" style="display:none;">
+      </form>
+
+      <form novalidate>
+        <input type="submit" class = "btn btn-primary" ng-click="createResponse(newchallenge)" value="Create" />
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    width: 200px;
+  }
+  .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+</style>
+<iframe name="myiframe_respond" id="video_frame_respond" style="display:none;"></iframe>
 
 <script>
+  
+  $(function(){
     
-    $(function(){
-    $('#video_frame').load(function(){
-            window.video_url = $('#video_frame').contents().find("body").html();
+
+    $('#video_file_respond').change(function() {
+      $("#video_form_respond").submit();
     });
+
+    $('#video_frame_respond').load(function(){
+      window.video_url = $('#video_frame_respond').contents().find("body").html();
+      var video  = document.getElementById('video_view_respond');
+      var source = document.createElement('source');
+
+      $("#video_view_respond").css("display","block");
+      source.setAttribute('src', window.video_url);
+      video.appendChild(source);
+
     });
+  });
 
 </script>
