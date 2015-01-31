@@ -1,0 +1,22 @@
+<h2>{{challenge.name}}</h2>
+
+<p>{{challenge.startDate}}</p>
+<p>Upvotes: {{challenge.upvotes}}</p>
+
+<!-- surely there's a way to do relative urls, but whatever -->
+<a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
+
+
+<h3>Responses</h3>
+
+<!-- hide if no responses - TODO: have placeholder otherwise -->
+<ul id="challenge-reponses">
+    <li ng-repeat="response in challenge.responses">
+        <img src="{{response.thumbUrl}}" alt="">
+        <ul>
+            <li>{{response.startDate}}</li>
+            <li>Upvotes: {{response.upvotes}}</li>
+        </ul>
+        <button ng-click="upvote(response.$id)">Upvote</button>
+    </li>
+</ul>

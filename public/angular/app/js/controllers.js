@@ -24,6 +24,24 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     }
   }])
 
+  .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
+    // ## public
+    var challenge = fbutil.syncObject('public-challenges/'+$routeParams['challengeId'], {limit: 10, endAt: null});
+    $scope.challenge = challenge;
+
+
+    //## hack
+
+    $scope.upvote = function(responseId){
+      console.log(responseId);
+      debugger;
+      var response = challenge.child('responses/'+responseId);
+      response.child('upvotes').transaction(function(curUpvotes){
+        return curUpvotes+1;
+      });
+    }
+  }])
+
   .controller('ResponseCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
     // ## always public
     var responsesRef = fbutil.ref('public-challenges/'+$routeParams['challengeId']+'/responses');
