@@ -258,6 +258,7 @@ function checkForRedirectMessage($location){
   if(kik.message){
     alert('We have a message!');
   }
+  alert('alert test');
   if(kik.message && kik.message.data && !kik.message.followed){
     if(kik.message.data.redirectTo){
       kik.message.followed = true;
