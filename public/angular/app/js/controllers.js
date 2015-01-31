@@ -36,6 +36,24 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         return curUpvotes+1;
       });
     }
+
+    $scope.share = function(){
+      kik.pickUsers(function(users){
+        if(!users){
+            // action was cancelled by user
+        } else {
+            users.forEach(function(user){
+              kik.send(user.username, {
+                // TODO: message content
+                title: 'You have been challenged to: ' + $scope.challenge.name,
+                // body: 
+                // ## TODO: don't know how to recieve this
+                data: { challengeId: $scope.challenge.$id }
+              });
+            });
+        }
+      });
+    }
   }])
 
   .controller('ResponseCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
