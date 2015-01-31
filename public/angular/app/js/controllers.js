@@ -11,7 +11,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('PBChallengesCtrl', ['$scope', '$location', 'publicChallengeList', 'fbutil', function($scope, $location, publicChallengeList, fbutil) {
     
-    checkForRedirectMessage($location);
+    checkForRedirectMessage($location, $scope);
 
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
@@ -135,7 +135,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   // --- 
   .controller('HomeCtrl', ['$scope', '$location', 'fbutil', 'user', 'FBURL', function($scope, $location, fbutil, user, FBURL) {
     
-    checkForRedirectMessage($location);
+    checkForRedirectMessage($location, $scope);
 
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
@@ -253,15 +253,16 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     }
   ]);
 
-function checkForRedirectMessage($location){
-  //DEBUG
-  document.body.appendChild(document.createTextNode('message: '+JSON.stringify(kik.message) ));
-
+// ## EXTREME HACK
+function checkForRedirectMessage($location, $scope){
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
       setTimeout(function(){
+        console.log('t');
         kik.message.followed = true;
+        
         $location.path(kik.message.redirectTo);
+        $scope.$apply();
       }, 1000);
     }
   }
