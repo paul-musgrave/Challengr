@@ -125,6 +125,14 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
         if( !user && authRequired($location.path()) ) {
           $location.path(loginRedirectPath);
         }
+
+
+        if(kik.message && kik.message.data && !kik.message.followed){
+          if(kik.message.data.redirectTo){
+            kik.message.followed = true;
+            $location.path(kik.message.data.redirectTo);
+          }
+        }
       }
 
       function authRequired(path) {
