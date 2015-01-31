@@ -51,7 +51,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
                 title: 'You have been challenged to: ' + $scope.challenge.name,
                 // body: 
                 // ## TODO: don't know how to recieve this
-                data: { redirectTo: '#/public-challenges/'+$scope.challenge.$id }
+                data: { redirectTo: '/public-challenges/'+$scope.challenge.$id }
               });
             });
         }
