@@ -9,11 +9,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
   <link rel="stylesheet" href="css/app.css"/>
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </head>
 <body ng-cloak>
+  <nav class="navbar navbar-default navbar-fixed-top">
+   <div class="container-fluid">
+    <a type="button" href="#/public-challenges" class="btn btn-primary navbar-btn">Public</a>
+    <a type="button" href="#/create-challenge" class="btn btn-primary navbar-btn">Create</a>
+    <a type="button" class="btn btn-primary navbar-btn">Current Challenges</a>
+   </div>
+  </nav>
+  <div class="banner">
+    
+  </div>
+
+  <style>
+    body {
+      margin: 0px;
+      background: url(img/pattern.png)
+    }
+  </style>
 
   <ul class="menu">
     <li><a href="#/home">home</a></li>

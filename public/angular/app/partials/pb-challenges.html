@@ -1,16 +1,20 @@
-<h2>Public Challenges</h2>
+<h2 style="margin: 0 auto;text-align:center;padding:20px 0px;">Public Challenges</h2>
 
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
-<ul id="pb-challenges" ng-show="publicc.length">
-    <li ng-repeat="challenge in publicc">
-        {{challenge.name}}
+<div id="pb-challenges" ng-show="publicc.length" style="text-align:center;padding: 0px 20px;">
+
+		<div ng-repeat="challenge in publicc" class="panel panel-default">
+		  <div class="panel-heading" style="border-bottom:0px;">
+		    <h2 class="panel-title">{{challenge.name}}</h2>
+		  </div>
+		  <div class="panel-body">
         <img src="{{challenge.thumbUrl}}" alt="">
-        <ul>
-            <li>{{challenge.startDate}}</li>
-            <li>Upvotes: {{challenge.upvotes}}</li>
-        </ul>
-        <button ng-click="upvote(challenge.$id)">Upvote</button>
-    </li>
-</ul>
+          <p>{{challenge.startDate}}</p>
+          <p>Upvotes: {{challenge.upvotes}}</p>
+        <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
+		  </div>
+		</div>
+
+</div>
 
 <!-- todo: create -->
