@@ -18,7 +18,7 @@
 				  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder" style="width:250px;">
 				</div>
 				<br />
-				<video style="display:none;margin: 0 auto;" id = "video_view" width="320" height="240" controls>
+				<video style="display:none;margin: 0 auto;" id = "video_view" width="220" height="120" controls>
 				</video>
 
 				<br />
@@ -74,7 +74,6 @@
 
     $('#video_frame').load(function(){
 			window.video_url = $('#video_frame').contents().find("body").html();
-			alert("Loading video");
 			var video  = document.getElementById('video_view');
 			var source = document.createElement('source');
 			var mycanvas = document.getElementById('mycanvas');

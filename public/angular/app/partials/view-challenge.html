@@ -1,22 +1,38 @@
-<h2>{{challenge.name}}</h2>
 
-<p>{{challenge.startDate}}</p>
-<p>Upvotes: {{challenge.upvotes}}</p>
+<div style="padding: 0px 20px; margin-top:-110px;">
+	<!-- surely there's a way to do relative urls, but whatever -->
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">{{challenge.name}}</h3>
+	  </div>
+	  <div class="panel-body" style="margin: 0 auto; text-align:center;">
+	  	<div style="margin-left:-30px;">
+	      <video name="video_{{challenge.name}}" style="margin: 0 auto;" width="220" onclick="this.play();" height="120">
+	      	 <source src="{{challenge.videoUrl}}" />
+				</video>
+			</div>
+	    <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
+	    <p> Start Time : <span>{{challenge.startDate}}</span> </p>
+	    <p>Upvotes: <span class="badge">{{challenge.upvotes}}</span></p>
+	   <button ng-click="share()" class = "btn btn-success" style="float:right;">Share</button>
+	  </div>
 
-<!-- surely there's a way to do relative urls, but whatever -->
-<a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
-<button ng-click="share()">Share</button>
+	</div>
 
-<h3>Responses</h3>
 
-<!-- hide if no responses - TODO: have placeholder otherwise -->
-<ul id="challenge-reponses">
-    <li ng-repeat="response in responses">
-        <img src="{{response.thumbUrl}}" alt="">
-        <ul>
-            <li>{{response.startDate}}</li>
-            <li>Upvotes: {{response.upvotes}}</li>
-        </ul>
-        <button ng-click="upvote(response.$id)">Upvote</button>
-    </li>
-</ul>
+	
+
+	<h3>Responses</h3>
+
+	<!-- hide if no responses - TODO: have placeholder otherwise -->
+	<ul id="challenge-reponses">
+	    <li ng-repeat="response in responses">
+	        <img src="{{response.thumbUrl}}" alt="">
+	        <ul>
+	            <li>{{response.startDate}}</li>
+	            <li>Upvotes: {{response.upvotes}}</li>
+	        </ul>
+	        <button ng-click="upvote(response.$id)">Upvote</button>
+	    </li>
+	</ul>
+</div>

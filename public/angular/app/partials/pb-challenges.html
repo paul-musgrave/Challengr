@@ -13,7 +13,7 @@
 	        <!-- <div class="video_cover" id="video_{{challenge.name}}">
 	        </div> -->
 	        <div style="margin-left:-30px;">
-		        <video class = "card_video" name="video_{{challenge.name}}" style="margin: 0 auto;" width="220" onclick="$('#'+$(this).attr('name')).css('background', 'none');this.play();" height="120">
+		        <video class = "card_video" name="video_{{challenge.name}}" style="margin: 0 auto;" width="220" onclick="this.play();" height="120">
 		        	 <source src="{{challenge.videoUrl}}" />
 						</video>
 					</div>
