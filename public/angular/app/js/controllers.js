@@ -259,13 +259,13 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 function checkForRedirectMessage($location, $scope){
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
-      // setTimeout(function(){
-      //   console.log('t');
+      setTimeout(function(){
+        console.log('t');
         kik.message.followed = true;
         
         $location.path(kik.message.redirectTo);
         $scope.$apply();
-      // }, 1000);
+      }, 10000);
     }
   }
 }
