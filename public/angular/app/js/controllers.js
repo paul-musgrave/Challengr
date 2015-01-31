@@ -1,5 +1,10 @@
 'use strict';
 
+// DEV: empty user when not in kik
+if(kik && !kik.getUser){
+  kik.getUser = function(cb){cb({})}
+}
+
 /* Controllers */
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
@@ -16,6 +21,54 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       challenge.child('upvotes').transaction(function(curUpvotes){
         return curUpvotes+1;
       });
+    }
+  }])
+
+  .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
+    // ## hack
+    var path = 'public-challenges/'+$routeParams['challengeId'];
+    $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});;
+    $scope.responses = fbutil.syncArray(path+'/responses', {limit: 10, endAt: null});
+
+    $scope.upvote = function(responseId){
+      var response = fbutil.ref(path+'/responses/'+responseId);
+      response.child('upvotes').transaction(function(curUpvotes){
+        return curUpvotes+1;
+      });
+    }
+  }])
+
+  .controller('ResponseCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
+    // ## always public
+    var responsesRef = fbutil.ref('public-challenges/'+$routeParams['challengeId']+'/responses');
+
+    $scope.newresponse = {};
+
+    $scope.createResponse = function(response){
+      //TODO: validation (on form with angular somehow?)
+
+      // TODO: video. also thumbnail
+
+      response.upvotes = 0;
+      response.submittedAt = +new Date();
+      response.videoUrl = window.video_url || 'no video';
+
+      // ## for now, just do this kikwise
+      kik.getUser(function(user){
+        // ## should do this, but for debug purposes don't
+        // if(!user){
+        //   alert('You need to login to submit a challenge!');
+        // } else {
+          response.submittedBy = user.username || 'unknown';
+
+          responsesRef.push(response, function(){
+            ///TODO
+            console.log('submitted!');
+            // ##?
+            $location.path('/public-challenges');
+          });
+        // }
+        });
     }
   }])
 

@@ -1,11 +1,12 @@
 <h2 style="margin: 0 auto;text-align:center;padding:20px 0px;">Public Challenges</h2>
 
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
+
 <div id="pb-challenges" ng-show="publicc.length" style="text-align:center;padding: 0px 20px;">
 
 		<div ng-repeat="challenge in publicc" class="panel panel-default">
 		  <div class="panel-heading" style="border-bottom:0px;">
-		    <h2 class="panel-title">{{challenge.name}}</h2>
+        <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
 		  <div class="panel-body">
         <img src="{{challenge.thumbUrl}}" alt="">
