@@ -6,7 +6,28 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', function($scope, publicChallengeList) {
     $scope["publicc"] = publicChallengeList;
-    console.log(publicChallengeList);// DEBUG
+    // $scope.addMessage = function(newMessage) {
+    //   if( newMessage ) {
+    //     $scope.messages.$add({text: newMessage});
+    //   }
+    // };
+  }])
+
+  .controller('ChallengeCreateCtrl', ['$scope', 'fbutil', function($scope, fbutil) {
+    // ## always public
+    var publicChallengesRef = fbutil.ref('public-challenges');
+
+    //#?
+    $scope.newchallenge = {};
+
+    $scope.createChallenge = function(challengeData){
+      //TODO: validation (on form with angular somehow?)
+      //TODO: attach current date
+      publicChallengesRef.push(challengeData, function(){
+        ///TODO
+        console.log('submitted!');
+      });
+    }
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
     //     $scope.messages.$add({text: newMessage});
