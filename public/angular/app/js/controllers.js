@@ -3,6 +3,18 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
+
+  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', function($scope, publicChallengeList) {
+    $scope["publicc"] = publicChallengeList;
+    console.log(publicChallengeList);// DEBUG
+    // $scope.addMessage = function(newMessage) {
+    //   if( newMessage ) {
+    //     $scope.messages.$add({text: newMessage});
+    //   }
+    // };
+  }])
+
+  // --- 
   .controller('HomeCtrl', ['$scope', 'fbutil', 'user', 'FBURL', function($scope, fbutil, user, FBURL) {
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;

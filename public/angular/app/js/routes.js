@@ -3,6 +3,13 @@
 angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
 
   .constant('ROUTES', {
+
+    '/public-challenges': {
+      templateUrl: 'partials/pb-challenges.html',
+      controller: 'PBChallengesCtrl'
+    },
+
+    /// ----
     '/home': {
       templateUrl: 'partials/home.html',
       controller: 'HomeCtrl',
