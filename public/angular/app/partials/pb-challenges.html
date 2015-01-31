@@ -9,16 +9,37 @@
         <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
 		  <div class="panel-body">
-        <!-- <img src="{{challenge.thumbUrl}}" alt=""> -->
-        <video style="margin: 0 auto;" width="320" height="240" controls>
-        	 <source src="{{challenge.videoUrl}}" />
-				</video>
-          <p>{{challenge.startDate}}</p>
-          <p>Upvotes: {{challenge.upvotes}}</p>
-        <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
-		  </div>
+		  	<div style="margin-top: -100px;">
+	        <!-- <img src="{{challenge.thumbUrl}}" alt=""> -->
+	        <div class="video_cover" id="video_{{challenge.name}}">
+	        </div>
+	        <video class = "card_video" name="video_{{challenge.name}}" style="margin: 0 auto;" width="220" onclick="$('#'+$(this).attr('name')).css('background', 'none');this.play();" height="120">
+	        	 <source src="{{challenge.videoUrl}}" />
+					</video>
+	          <p>{{challenge.startDate}}</p>
+	          <p>Upvotes: {{challenge.upvotes}}</p>
+	        <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
+			  </div>
+			</div>
 		</div>
 
 </div>
 
+<style>
+	.video_cover {
+		pointer-events: none;
+		background: url(https://openclipart.org/image/300px/svg_to_png/188943/playbuttonclear.png);
+		background-size: contain;
+		background-position: center;
+		opacity: 0.5;
+		border: 1px solid #d1d1d1;
+		width: 220px;
+		height: 120px;
+		margin: 0 auto;
+		position: relative;
+		top:120px;
+		z-index: 1000;
+		background-repeat: no-repeat;
+	}
+</style>
 <!-- todo: create -->
