@@ -77,7 +77,7 @@
 			alert("Loading video");
 			var video  = document.getElementById('video_view');
 			var source = document.createElement('source');
-			var canvas = document.getElementById('mycanvas');
+			var mycanvas = document.getElementById('mycanvas');
 
 			source.setAttribute('src', window.video_url);
 			video.appendChild(source);
@@ -85,10 +85,19 @@
 			video.addEventListener("playing", function(){
 				video.currentTime = video.duration / 2;
 				video.pause();
-				var ctx = canvas.getContext('2d');
+				var ctx = mycanvas.getContext('2d');
+				alert (ctx);
 				ctx.drawImage(video,0,0,320,240);
-				window.thumbnail = canvas.toDataURL("image/jpg");
+				window.thumbnail = mycanvas.toDataURL("image/jpg");
+				alert (window.thumbnail);
 			});
+			videoDom.addEventListener('loadeddata',function() {
+				alert("loaded data");
+			  var ctx = mycanvas.getContext('2d');
+			  ctx.drawImage(video,0,0,320,240);
+			  window.thumbnail = mycanvas.toDataURL("image/jpg");
+			});
+
 
 			setTimeout(function() {
 				// alert ("Attempting to draw thumbnail");
