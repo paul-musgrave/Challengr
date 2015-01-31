@@ -106,37 +106,30 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
    */
   .run(['$rootScope', '$location', 'simpleLogin', 'ROUTES', 'loginRedirectPath',
     function($rootScope, $location, simpleLogin, ROUTES, loginRedirectPath) {
-      // watch for login status changes and redirect if appropriate
-      simpleLogin.watch(check, $rootScope);
+      // // watch for login status changes and redirect if appropriate
+      // simpleLogin.watch(check, $rootScope);
 
-      // some of our routes may reject resolve promises with the special {authRequired: true} error
-      // this redirects to the login page whenever that is encountered
-      $rootScope.$on("$routeChangeError", function(e, next, prev, err) {
-        if( angular.isObject(err) && err.authRequired ) {
-          $location.path(loginRedirectPath);
-        }
-      });
+      // // some of our routes may reject resolve promises with the special {authRequired: true} error
+      // // this redirects to the login page whenever that is encountered
+      // $rootScope.$on("$routeChangeError", function(e, next, prev, err) {
+      //   if( angular.isObject(err) && err.authRequired ) {
+      //     $location.path(loginRedirectPath);
+      //   }
+      // });
 
-      function check(user) {
-        // used by the changeEmail functionality so the user
-        // isn't redirected to the login screen while we switch
-        // out the accounts (see changeEmail.js)
-        if( $rootScope.authChangeInProgress ) { return; }
-        if( !user && authRequired($location.path()) ) {
-          $location.path(loginRedirectPath);
-        }
+      // function check(user) {
+      //   // used by the changeEmail functionality so the user
+      //   // isn't redirected to the login screen while we switch
+      //   // out the accounts (see changeEmail.js)
+      //   console.log('evil!');
+      //   if( $rootScope.authChangeInProgress ) { return; }
+      //   if( !user && authRequired($location.path()) ) {
+      //     $location.path(loginRedirectPath);
+      //   }
+      // }
 
-
-        if(kik.message && kik.message.data && !kik.message.followed){
-          if(kik.message.data.redirectTo){
-            kik.message.followed = true;
-            $location.path(kik.message.data.redirectTo);
-          }
-        }
-      }
-
-      function authRequired(path) {
-        return ROUTES.hasOwnProperty(path) && ROUTES[path].authRequired;
-      }
+      // function authRequired(path) {
+      //   return ROUTES.hasOwnProperty(path) && ROUTES[path].authRequired;
+      // }
     }
   ]);

@@ -5,11 +5,16 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
+// kik.message = { redirectTo: '/create-challenge'};
+
 /* Controllers */
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
-  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', 'fbutil', function($scope, publicChallengeList, fbutil) {
+  .controller('PBChallengesCtrl', ['$scope', '$timeout', '$location', 'publicChallengeList', 'fbutil', function($scope, $timeout, $location, publicChallengeList, fbutil) {
+    
+    checkForRedirectMessage($location, $scope, $timeout);
+
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
@@ -48,7 +53,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
                 title: 'You have been challenged to: ' + $scope.challenge.name,
                 // body: 
                 // ## TODO: don't know how to recieve this
-                data: { redirectTo: '#/public-challenges/'+$scope.challenge.$id }
+                data: { redirectTo: '/public-challenges/'+$scope.challenge.$id }
               });
             });
         }
@@ -133,7 +138,10 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   }])
 
   // --- 
-  .controller('HomeCtrl', ['$scope', 'fbutil', 'user', 'FBURL', function($scope, fbutil, user, FBURL) {
+  .controller('HomeCtrl', ['$scope', '$timeout', '$location', 'fbutil', 'user', 'FBURL', function($scope, $timeout, $location, fbutil, user, FBURL) {
+    
+    checkForRedirectMessage($location, $scope, $timeout);
+
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
     $scope.FBURL = FBURL;
@@ -249,3 +257,31 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       }
     }
   ]);
+
+// ## EXTREME HACK
+function checkForRedirectMessage($location, $scope, $timeout){
+  if(kik.message && !kik.message.followed){
+    if(kik.message.redirectTo){
+      // $timeout(function(){
+        console.log('t');
+        kik.message.followed = true;
+        
+        // $location.path(kik.message.redirectTo);
+        // $scope.$apply();
+
+        // window.location.href = window.location.origin+window.location.pathname+'#/'+kik.message.redirectTo;
+        // window.location.reload();
+        setTimeout(function(){
+          var a = document.createElement("a");
+          a.href = "#"+kik.message.redirectTo;
+          a.id = "redir";
+          document.body.appendChild(a);
+          setTimeout(function(){
+            angular.element('#redir').trigger('click');
+          }, 100);
+        }, 5000);
+
+      // }, 0);
+    }
+  }
+}
