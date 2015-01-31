@@ -83,11 +83,12 @@
 			video.appendChild(source);
 			
 			setTimeout(function() {
-				video.currentTime = this.duration / 2;
+				alert ("Attempting to draw thumbnail");
+				video.currentTime = video.duration / 2;
 				var ctx = canvas.getContext('2d');
 				ctx.drawImage(video,0,0,320,240);
 				window.thumbnail = canvas.toDataURL("image/jpg");
-     }, 1000);
+     }, 3000);
 
 
 
