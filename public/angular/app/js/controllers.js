@@ -9,7 +9,10 @@ if(kik && !kik.getUser){
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
-  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', 'fbutil', function($scope, publicChallengeList, fbutil) {
+  .controller('PBChallengesCtrl', ['$scope', '$location', 'publicChallengeList', 'fbutil', function($scope, $location, publicChallengeList, fbutil) {
+    
+    checkForRedirectMessage($location);
+
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
@@ -130,7 +133,10 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   }])
 
   // --- 
-  .controller('HomeCtrl', ['$scope', 'fbutil', 'user', 'FBURL', function($scope, fbutil, user, FBURL) {
+  .controller('HomeCtrl', ['$scope', '$location', 'fbutil', 'user', 'FBURL', function($scope, $location, fbutil, user, FBURL) {
+    
+    checkForRedirectMessage($location);
+
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
     $scope.FBURL = FBURL;
@@ -246,3 +252,16 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       }
     }
   ]);
+
+function checkForRedirectMessage($location){
+  //DEBUG
+  if(kik.message){
+    alert('We have a message!');
+  }
+  if(kik.message && kik.message.data && !kik.message.followed){
+    if(kik.message.data.redirectTo){
+      kik.message.followed = true;
+      $location.path(kik.message.data.redirectTo);
+    }
+  }
+}
