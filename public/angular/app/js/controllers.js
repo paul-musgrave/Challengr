@@ -255,7 +255,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
 function checkForRedirectMessage($location){
   //DEBUG
-  document.body.appendChild(document.createTextNode('test'));
+  document.body.appendChild(document.createTextNode('message: '+JSON.stringify(kik.message) ));
 
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
