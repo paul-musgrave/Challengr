@@ -5,7 +5,7 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
-kik.message = { redirectTo: '/create-challenge'};
+// kik.message = { redirectTo: '/create-challenge'};
 
 /* Controllers */
 
