@@ -9,7 +9,10 @@
         <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
 		  <div class="panel-body">
-        <img src="{{challenge.thumbUrl}}" alt="">
+        <!-- <img src="{{challenge.thumbUrl}}" alt=""> -->
+        <video style="margin: 0 auto;" width="320" height="240" controls>
+        	 <source src="{{challenge.videoUrl}}" />
+				</video>
           <p>{{challenge.startDate}}</p>
           <p>Upvotes: {{challenge.upvotes}}</p>
         <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>

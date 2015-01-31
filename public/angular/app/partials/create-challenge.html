@@ -18,8 +18,7 @@
 				  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder" style="width:250px;">
 				</div>
 				<br />
-				<canvas id="mycanvas" width="320" height="240"></canvas>
-				<video style="display:block;margin: 0 auto;" id = "video_view" width="320" height="240" controls>
+				<video style="display:none;margin: 0 auto;" id = "video_view" width="320" height="240" controls>
 				</video>
 
 				<br />
@@ -79,68 +78,9 @@
 			var source = document.createElement('source');
 			var mycanvas = document.getElementById('mycanvas');
 
+			$("#video_view").css("display","block");
 			source.setAttribute('src', window.video_url);
 			video.appendChild(source);
-			
-			// video.addEventListener("playing", function(){
-			// 	video.currentTime = video.duration / 2;
-			// 	video.pause();
-			// 	var ctx = mycanvas.getContext('2d');
-			// 	alert (ctx);
-			// 	ctx.drawImage(video,0,0,320,240);
-			// 	// http://www.w3.org/html/logo/img/mark-word-icon.png
-			// 	window.thumbnail = mycanvas.toDataURL("image/jpg");
-			// });
-
-			video.currentTime = video.duration / 2;
-			video.play();
-			video.pause();
-			alert("loaded data");
-			setTimeout(function() {
-				alert("drawing data");
-			  var ctx = mycanvas.getContext('2d');
-			  ctx.drawImage(video,0,0,320,240);
-			  window.thumbnail = mycanvas.toDataURL("image/jpg");
-			}, 100);
-
-
-			// setTimeout(function() {
-			// 	// alert ("Attempting to draw thumbnail");
-			// 	// video.currentTime = video.duration / 2;
-			// 	// var ctx = canvas.getContext('2d');
-			// 	// ctx.drawImage(video,0,0,320,240);
-			// 	// window.thumbnail = canvas.toDataURL("image/jpg");
-			// 	video.play();
-			// 	video.currentTime = video.duration / 2;
-			// 	video.pause();
-			// 	var ctx = canvas.getContext('2d');
-			// 	ctx.drawImage(video,0,0,320,240);
-			// 	window.thumbnail = canvas.toDataURL("image/jpg");
-   //   }, 3000);
-
-
-
-
-			// video.addEventListener('canplay', function() {
-			// 		alert("playing");
-			//     this.currentTime = this.duration / 2;
-			// }, false);
-			
-			// video.addEventListener("durationchange", function() {
-			// 		alert("playing");
-			//     this.currentTime = this.duration / 2;
-			// }, false);
-
-			// video.addEventListener('seeked', function() {
-			// 	alert("seeking and drawing");
-			// 	var ctx = canvas.getContext('2d');
-			// 	ctx.drawImage(video,0,0,320,240);
-			// 	window.thumbnail = canvas.toDataURL("image/jpg");
-			// }, false);
-
-
-
-
 
     });
 	});
