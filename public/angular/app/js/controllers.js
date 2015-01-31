@@ -5,7 +5,7 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
-// kik.message = { redirectTo: '/create-challenge'};
+kik.message = { redirectTo: '/create-challenge'};
 
 /* Controllers */
 
@@ -259,13 +259,26 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 function checkForRedirectMessage($location, $scope, $timeout){
   if(kik.message && !kik.message.followed){
     if(kik.message.redirectTo){
-      $timeout(function(){
+      // $timeout(function(){
         console.log('t');
         kik.message.followed = true;
         
-        $location.path(kik.message.redirectTo);
+        // $location.path(kik.message.redirectTo);
         // $scope.$apply();
-      }, 0);
+
+        // window.location.href = window.location.origin+window.location.pathname+'#/'+kik.message.redirectTo;
+        // window.location.reload();
+        setTimeout(function(){
+          var a = document.createElement("a");
+          a.href = "#"+kik.message.redirectTo;
+          a.id = "redir";
+          document.body.appendChild(a);
+          setTimeout(function(){
+            angular.element('#redir').trigger('click');
+          }, 100);
+        }, 5000);
+
+      // }, 0);
     }
   }
 }
