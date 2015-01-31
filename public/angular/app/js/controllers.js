@@ -28,11 +28,22 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
 
-      publicChallengesRef.push(challengeData, function(){
-        ///TODO
-        console.log('submitted!');
-        $location.path('/public-challenges');
+      // ## for now, just do this kikwise
+      kik.getUser(function(user){
+        // ## should do this, but for debug purposes don't
+        // if(!user){
+        //   alert('You need to login to submit a challenge!');
+        // } else {
+          challengeData.submittedBy = user.username;
+
+          publicChallengesRef.push(challengeData, function(){
+            ///TODO
+            console.log('submitted!');
+            $location.path('/public-challenges');
+          });
+        // }
       });
+
     }
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
