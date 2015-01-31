@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-# Add firebase gem
+# Paperclip used for saving files
+gem 'paperclip'
+
+# Add firebase gem for hosting data
 gem 'firebase'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use postgresql as the database for Active Record
