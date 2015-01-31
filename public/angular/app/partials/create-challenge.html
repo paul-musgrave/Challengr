@@ -1,47 +1,45 @@
 <div style="padding : 0px 31px;">
-	<form accept-charset="UTF-8" action="/challengr/post_video" data-remote="true" enctype="multipart/form-data" id="video_form" method="post" target="myiframe">
-
-		<div style="display:none">
-			<input name="utf8" type="hidden" value="✓">
-		</div>
-
-		<div class="panel panel-default" style="text-align:center;">
+	
+	<div class="panel panel-default" style="text-align:center;">
 		  
+	  <div class="panel-heading" style="border-bottom:0px;">
+	    <h3 style="text-align:center;">Create Challenge</h3>
+	  </div>
 
-		  <div class="panel-heading" style="border-bottom:0px;">
-		    <h3 style="text-align:center;">Create Challenge</h3>
-		  </div>
+		<div class="panel-body">
+			<form accept-charset="UTF-8" action="/challengr/post_video" data-remote="true" enctype="multipart/form-data" id="video_form" method="post" target="myiframe">
 
-
-			<div class="panel-body">
+				<div style="display:none">
+					<input name="utf8" type="hidden" value="✓">
+				</div>
 
 				<div class="fileUpload btn btn-default">
 				  <span>Record Video</span>
 				  <input id="video_file" name="video[file]" type="file" accept="video/*;capture=camcorder">
 				</div>
+				<br />
+				<video style="display:none;margin: 0 auto;" id = "video_view" width="320" height="240" controls>
+				</video>
 
 				<br />
 			  
 			  <input name="commit" type="submit" value="Save Video" id="attatchVidButton" style="display:none;">
-		  
-		  
-				<form novalidate>
-				  <div class = "row">
-				  	<div class = "col-sm-3">
-				  	  <b>Name:</b>
-				  	</div>
-				  	<div class = "col-sm-9">
-				  		<input type="text" class="form-control" ng-model="newchallenge.name" />
-				  	</div>
-				  </div>
-				  <br />
-				    <input type="submit" class = "btn btn-primary" ng-click="createChallenge(newchallenge)" value="Create" />
-				</form>
-		  </div>
-
+			</form>
+				  
+			<form novalidate>
+			  <div class = "row">
+			  	<div class = "col-sm-3">
+			  	  <b>Name:</b>
+			  	</div>
+			  	<div class = "col-sm-9">
+			  		<input type="text" class="form-control" ng-model="newchallenge.name" />
+			  	</div>
+			  </div>
+			  <br />
+			    <input type="submit" class = "btn btn-primary" ng-click="createChallenge(newchallenge)" value="Create" />
+			</form>
 		</div>
-
-	</form>
+	</div>
 </div>
 
 <style>
@@ -64,17 +62,24 @@
 </style>
 <iframe name="myiframe" id="video_frame" style="display:none;"></iframe>
 
-
 <script>
 	
 	$(function(){
 		
 		$('#video_file').change(function() {
-		  return $("#attatchVidButton").submit();
+		  $("#video_form").submit();
 		});
 
     $('#video_frame').load(function(){
 			window.video_url = $('#video_frame').contents().find("body").html();
+			$('#video_view').css("display", "block");
+			var video = document.getElementById('video_view');
+			var source = document.createElement('source');
+
+			source.setAttribute('src', window.video_url);
+			video.appendChild(source);
+			video.play();
+
     });
 	});
 
