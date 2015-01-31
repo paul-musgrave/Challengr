@@ -32,6 +32,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
       response.upvotes = 0;
       response.submittedAt = +new Date();
+      response.videoUrl = window.video_url;
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -41,9 +42,10 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         // } else {
           response.submittedBy = user.username;
 
-          publicChallengesRef.push(response, function(){
+          responsesRef.push(response, function(){
             ///TODO
             console.log('submitted!');
+            // ##?
             $location.path('/public-challenges');
           });
         // }
