@@ -4,13 +4,19 @@
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
-  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', function($scope, publicChallengeList) {
+  .controller('PBChallengesCtrl', ['$scope', 'publicChallengeList', 'fbutil', function($scope, publicChallengeList, fbutil) {
     $scope["publicc"] = publicChallengeList;
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
     //     $scope.messages.$add({text: newMessage});
     //   }
     // };
+    $scope.upvote = function(challengeId){
+      var challenge = fbutil.ref('public-challenges').child(challengeId);
+      challenge.child('upvotes').transaction(function(curUpvotes){
+        return curUpvotes+1;
+      });
+    }
   }])
 
   .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
@@ -28,11 +34,22 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
       challengeData.videoUrl = window.video_url;
-      publicChallengesRef.push(challengeData, function(){
-        ///TODO
-        console.log('submitted!');
-        $location.path('/public-challenges');
+      // ## for now, just do this kikwise
+      kik.getUser(function(user){
+        // ## should do this, but for debug purposes don't
+        // if(!user){
+        //   alert('You need to login to submit a challenge!');
+        // } else {
+          challengeData.submittedBy = user.username;
+
+          publicChallengesRef.push(challengeData, function(){
+            ///TODO
+            console.log('submitted!');
+            $location.path('/public-challenges');
+          });
+        // }
       });
+
     }
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
