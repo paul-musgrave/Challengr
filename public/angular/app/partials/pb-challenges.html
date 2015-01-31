@@ -3,7 +3,7 @@
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
 <ul id="pb-challenges" ng-show="publicc.length">
     <li ng-repeat="challenge in publicc">
-        {{challenge.name}}
+        <a ng-href="#/challenge/{{challenge.$id}}/respond">{{challenge.name}}</a>
         <img src="{{challenge.thumbUrl}}" alt="">
         <ul>
             <li>{{challenge.startDate}}</li>

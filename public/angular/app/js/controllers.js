@@ -1,5 +1,10 @@
 'use strict';
 
+// DEV: empty user when not in kik
+if(kik && !kik.getUser){
+  kik.getUser = function(cb){cb({})}
+}
+
 /* Controllers */
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
@@ -19,9 +24,9 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     }
   }])
 
-  .controller('ResponseCtrl', ['$scope', '$routeParams', 'fbutil', function($scope, $routeParams, fbutil) {
+  .controller('ResponseCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
     // ## always public
-    var responsesRef = fbutil.ref('public-challenges/'+$routeParams[challengeId]+'/responses');
+    var responsesRef = fbutil.ref('public-challenges/'+$routeParams['challengeId']+'/responses');
 
     $scope.newresponse = {};
 
@@ -32,7 +37,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
       response.upvotes = 0;
       response.submittedAt = +new Date();
-      response.videoUrl = window.video_url;
+      response.videoUrl = window.video_url || 'no video';
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -40,7 +45,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         // if(!user){
         //   alert('You need to login to submit a challenge!');
         // } else {
-          response.submittedBy = user.username;
+          response.submittedBy = user.username || 'unknown';
 
           responsesRef.push(response, function(){
             ///TODO
@@ -49,7 +54,8 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
             $location.path('/public-challenges');
           });
         // }
-      });
+        });
+    }
   }])
 
   .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
