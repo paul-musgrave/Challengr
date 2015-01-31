@@ -13,7 +13,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     // };
   }])
 
-  .controller('ChallengeCreateCtrl', ['$scope', 'fbutil', function($scope, fbutil) {
+  .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
     // ## always public
     var publicChallengesRef = fbutil.ref('public-challenges');
 
@@ -31,6 +31,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       publicChallengesRef.push(challengeData, function(){
         ///TODO
         console.log('submitted!');
+        $location.path('/public-challenges');
       });
     }
     // $scope.addMessage = function(newMessage) {
