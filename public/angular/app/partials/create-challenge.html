@@ -86,6 +86,11 @@
 					alert("playing");
 			    this.currentTime = this.duration / 2;
 			}, false);
+			
+			video.addEventListener("durationchange", function() {
+					alert("playing");
+			    this.currentTime = this.duration / 2;
+			}, false);
 
 			video.addEventListener('seeked', function() {
 				alert("seeking and drawing");
