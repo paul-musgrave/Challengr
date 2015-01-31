@@ -82,22 +82,32 @@
 			source.setAttribute('src', window.video_url);
 			video.appendChild(source);
 			
-			video.addEventListener('canplay', function() {
-					alert("playing");
-			    this.currentTime = this.duration / 2;
-			}, false);
-			
-			video.addEventListener("durationchange", function() {
-					alert("playing");
-			    this.currentTime = this.duration / 2;
-			}, false);
-
-			video.addEventListener('seeked', function() {
-				alert("seeking and drawing");
+			setTimeout(function() {
+				video.currentTime = this.duration / 2;
 				var ctx = canvas.getContext('2d');
 				ctx.drawImage(video,0,0,320,240);
 				window.thumbnail = canvas.toDataURL("image/jpg");
-			}, false);
+     }, 100);
+
+
+
+
+			// video.addEventListener('canplay', function() {
+			// 		alert("playing");
+			//     this.currentTime = this.duration / 2;
+			// }, false);
+			
+			// video.addEventListener("durationchange", function() {
+			// 		alert("playing");
+			//     this.currentTime = this.duration / 2;
+			// }, false);
+
+			// video.addEventListener('seeked', function() {
+			// 	alert("seeking and drawing");
+			// 	var ctx = canvas.getContext('2d');
+			// 	ctx.drawImage(video,0,0,320,240);
+			// 	window.thumbnail = canvas.toDataURL("image/jpg");
+			// }, false);
 
 
 
