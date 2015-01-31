@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: ruby-getting-started_development
+  username: lucaszw
+  password: root
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: ruby-getting-started_production
-  username: ruby-getting-started
-  password: <%= ENV['RUBY-GETTING-STARTED_DATABASE_PASSWORD'] %>
+  database: de5h0sof6h2pnu
+  username: dffsydeooaexxs
+  password: WC5bgYvSF3kNmcZob_9Uo34lxy
