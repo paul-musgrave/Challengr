@@ -36,6 +36,16 @@
 			  		<input type="text" class="form-control" ng-model="newchallenge.name" />
 			  	</div>
 			  </div>
+
+			  <div class = "row">
+			  	<div class = "col-sm-3">
+			  	  <b>Private:</b>
+			  	</div>
+			  	<div class = "col-sm-9">
+			  		<input type="checkbox" ng-model="newchallenge.isPrivate" />
+			  	</div>
+			  </div>
+
 			  <br />
 			    <input type="submit" class = "btn btn-primary" ng-click="createChallenge(newchallenge)" value="Create" />
 			</form>
