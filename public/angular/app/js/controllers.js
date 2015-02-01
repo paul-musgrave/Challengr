@@ -151,41 +151,11 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     // ## always public
     var responsesRef = fbutil.ref('public-challenges/'+$routeParams['challengeId']+'/responses');
 
-    $scope.newresponse = {};
-
     $scope.createResponse = function(){
-      //TODO: validation (on form with angular somehow?)
-
-      var response = {"upvotes": 0, 
-                    "submittedAt":  +new Date(),
-                    "videoUrl": window.video_url || 'no video',
-                    "submittedBy": 'unknown',
-                    "thumbUrl" : "unkown"
-                    };
-
-      // TODO: video. also thumbnail
-
-      response.upvotes = 0;
-      response.submittedAt = +new Date();
-      response.videoUrl = window.video_url || 'no video';
-
-      // ## for now, just do this kikwise
-      kik.getUser(function(user){
-        // ## should do this, but for debug purposes don't
-        // if(!user){
-        //   alert('You need to login to submit a challenge!');
-        // } else {
-          response.submittedBy = user.username || 'unknown';
-          response.thumbUrl = user.thumbnail;
-          responsesRef.push(response, function(){
-            ///TODO
-            console.log('submitted!');
-            // ##?
-            $location.path('/public-challenges');
-          });
-        // }
-        });
-    }
+      responsesRef.push(createResponseObject(), function(){
+        $location.path('/public-challenges');
+      });
+    };
   }])
 
   .controller('ChallengeCreateCtrl', ['$scope', '$location', 'fbutil', function($scope, $location, fbutil) {
@@ -202,7 +172,11 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
-      challengeData.videoUrl = window.video_url;
+
+      // 
+      challengeData.responses = {
+        authorResponse: createResponseObject()
+      };
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -375,4 +349,20 @@ function checkForRedirectMessage($location, $scope, $timeout){
       // }, 0);
     }
   }
+}
+
+function setUser(){
+  kik.getUser(function(user){
+    window.kikuser = user;
+  });
+}
+
+function createResponseObject(){
+  return {
+    videoUrl: window.video_url || 'no video',
+    thumbUrl: (window.kikuser && window.kikuser.thumbnail) || 'no thumbnail',
+    submittedBy: (window.kikuser && window.kikuser.username) || 'placeholder-user',
+    submittedAt: +new Date(),
+    upvotes: 0
+  };
 }
