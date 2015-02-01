@@ -112,6 +112,29 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('MyChallengesCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
 
+    $scope.currentTime = + new Date();
+    $scope.endingTime = new Date($scope.currentTime);
+
+        $scope.getEndDate = function (startDate) {
+      var start_time = new Date(startDate);
+      return start_time.setDate(start_time.getDate()+2);
+    }
+
+    $scope.getTimeRemaining = function (startDate,currentDate){
+      var percentage_complete = $scope.percent_complete(startDate,currentDate);
+      return Math.round(48*(1-percentage_complete));
+    }
+
+    $scope.percent_complete = function (startDate,currentDate){
+      var endDate = $scope.getEndDate(startDate);
+      return 1 - (endDate - currentDate)/(endDate-startDate);
+    }
+
+    $scope.get_completion = function (startDate){
+      var currentDate = + new Date();
+      return Math.round($scope.percent_complete(startDate,currentDate)*100)/100;
+    }
+
     // ## does this async cause a problem?
     kik.getUser(function(user){
       // TEST
@@ -201,7 +224,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
       challengeData.videoUrl = window.video_url;
-      
+
       // 
       challengeData.responses = {
         authorResponse: createResponseObject()
