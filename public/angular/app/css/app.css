@@ -40,6 +40,14 @@ body {
   padding: 0;
 }
 
+.inline-menu ul {
+  margin: 0;
+  padding: 0;
+}
+.inline-menu li {
+  float: left;
+  list-style: none;
+}
 p.status {
    color: red;
 }
