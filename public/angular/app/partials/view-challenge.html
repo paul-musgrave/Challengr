@@ -29,7 +29,7 @@
 	</div>
 
 	<h3>Responses</h3>
-	<div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses">
+	<div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses | reverse ">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">{{response.submittedBy}}</h3>
 	  </div>
