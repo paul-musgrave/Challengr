@@ -9,6 +9,14 @@ angular.module('myApp.filters', [])
       }
    }])
 
+   .filter('publicOnly', function() {
+      return function(challenges) {
+         return Array.prototype.filter.call(challenges, function(challenge){
+            return !challenge.isPrivate;
+         });
+      };
+   })
+
    .filter('reverse', function() {
       return function(items) {
          return items.slice().reverse();

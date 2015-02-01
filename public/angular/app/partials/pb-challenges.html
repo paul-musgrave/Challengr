@@ -11,7 +11,7 @@
 
 <div id="pb-challenges" ng-show="publicc.length" style="text-align:center;padding: 0px 20px;">
 
-		<div ng-repeat="challenge in publicc | orderBy: sort | reverse" class="panel panel-default">
+		<div ng-repeat="challenge in publicc | publicOnly | orderBy: sort | reverse" class="panel panel-default">
 		  <div class="panel-heading" style="border-bottom:0px;">
         <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
