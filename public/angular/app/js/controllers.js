@@ -200,7 +200,8 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
       challengeData.upvotes = 0;
       challengeData.startDate = +new Date();
-
+      challengeData.videoUrl = window.video_url;
+      
       // 
       challengeData.responses = {
         authorResponse: createResponseObject()
