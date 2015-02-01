@@ -9,6 +9,11 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
       controller: 'PBChallengesCtrl'
     },
 
+    '/my-challenges': {
+      templateUrl: 'partials/my-challenges.html',
+      controller: 'MyChallengesCtrl'
+    },
+
     // TODO: should probably be something like challenges/create
     '/create-challenge': {
       templateUrl: 'partials/create-challenge.html',

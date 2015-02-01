@@ -1,5 +1,8 @@
+
+<div ng-hide="fromShare">
 <h2 style="margin: -190px auto 0px auto;text-align:center;padding:20px 0px 10px 0px; color:#ffffff;text-shadow: 0px -1px 1px #666;">Be Brave.</h2>
 <h4 style="margin: 0px auto 10px auto;text-align:center;color:#ffffff;text-shadow: 0px -1px 1px #666;">Send Your Friends Video Challenges</h4>
+
 <ul class="breadcrumb" style="opacity:0.8;width:70%;margin: 0px auto 10px auto;margin-bottom:2
 40px;text-align:center;">
 	<li ng-repeat="option in sortOptions" ng-click="setSort (option)" ><a>{{option}}</a></li>
@@ -27,7 +30,59 @@
 		</div>
 
 </div>
+</div>
 
+<!-- UBERHACK: duplicate the view challenge template for shared challenges since redirecting apparently doesn't work -->
+<div ng-show="fromShare">
+<div style="padding: 0px 20px; margin-top:-110px;">
+    <!-- surely there's a way to do relative urls, but whatever -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{challenge.name}}</h3>
+      </div>
+      <div class="panel-body" style="margin: 0 auto; text-align:center;">
+        <div class = "video_cover">
+        <video class = "card_video" width="220" onclick="this.play();" height="120">
+             <source src="{{challenge.videoUrl}}" type="video/quicktime" />
+                </video>
+            </div>
+            <br />
+        <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
+        <p> Start Time : <span>{{challenge.startDate}}</span> </p>
+        <p>Upvotes: <span class="badge">{{challenge.upvotes}}</span></p>
+       <button ng-click="share()" class = "btn btn-success" style="float:right;">Share</button>
+      </div>
 
+    </div>
+    
+
+    <h3>Responses</h3>
+    <div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{response.submittedBy}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class = "video_cover">
+        <video class = "card_video" width="220" onclick="this.play();" height="120">
+             <source src="{{response.videoUrl}}" />
+                </video>
+            </div>
+        <p> Start Time : <span>{{response.startDate}}</span> </p>
+        <p>Upvotes: <span class="badge">{{response.upvotes}}</span></p>
+        <button ng-click="upvote(response.$id)" class = "btn btn-success">Upvote</button>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ## additional share hack -->
+<script>
+    $('#public-challenges-button').on('click', function(){
+        window.pcscope.fromShare = false;
+        window.pcscope.upvote = window.pcscope.chupvote;
+        window.pcscope.$apply();
+    });
+</script>
 
 <!-- todo: create -->

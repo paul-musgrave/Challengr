@@ -5,18 +5,17 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
-// kik.message = { redirectTo: '/create-challenge'};
+// kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
 
 /* Controllers */
 
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('PBChallengesCtrl', ['$scope', '$timeout', '$location', 'publicChallengeList', 'fbutil', function($scope, $timeout, $location, publicChallengeList, fbutil) {
-    
-    checkForRedirectMessage($location, $scope, $timeout);
+
+    // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
-    
     $scope.sortOptions = ["upvotes", "startDate"];
     $scope.sort = "upvotes";
     $scope.setSort = function(type) { $scope.sort = type; };
@@ -28,12 +27,64 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     //     $scope.messages.$add({text: newMessage});
     //   }
     // };
-    $scope.upvote = function(challengeId){
+    $scope.chupvote = $scope.upvote = function(challengeId){
       var challenge = fbutil.ref('public-challenges').child(challengeId);
       challenge.child('upvotes').transaction(function(curUpvotes){
         return curUpvotes+1;
       });
     }
+
+    // more hack
+    window.pcscope = $scope;
+
+    // HACK: duplicate
+    if(kik.message && !kik.message.followed){
+      kik.message.followed = true;
+      $scope.fromShare = true;
+
+      var path = 'public-challenges/'+kik.message.challengeId;
+      $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});;
+      $scope.responses = fbutil.syncArray(path+'/responses', {limit: 10, endAt: null});
+
+      $scope.upvote = function(responseId){
+        var response = fbutil.ref(path+'/responses/'+responseId);
+        response.child('upvotes').transaction(function(curUpvotes){
+          return curUpvotes+1;
+        });
+      }
+
+      $scope.share = function(){
+        kik.pickUsers(function(users){
+          if(!users){
+              // action was cancelled by user
+          } else {
+              users.forEach(function(user){
+                kik.send(user.username, {
+                  // TODO: message content
+                  title: 'You have been challenged to: ' + $scope.challenge.name,
+                  // body: 
+                  // ## TODO: don't know how to recieve this
+                  data: { challengeId: $scope.challenge.$id }
+                });
+              });
+          }
+        });
+      }
+    }
+
+  }])
+
+  .controller('MyChallengesCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
+
+    // ## does this async cause a problem?
+    kik.getUser(function(user){
+      // TEST
+      if(!user.username){user.username = 'placeholder-user'}
+
+      var myChallenges = fbutil.syncArray('users/'+user.username+'/challenged-to', {limit: 10, endAt: null});
+      $scope.challenges = myChallenges;
+    });
+
   }])
 
   .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
@@ -54,7 +105,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     $scope.getTimeRemaining = function (startDate,currentDate){
       var percentage_complete = $scope.percent_complete(startDate,currentDate);
       return Math.round(48*(1 - percentage_complete/100));
-    }    
+    }
     $scope.percent_complete = function (startDate,currentDate){
       var endDate = $scope.getEndDate(startDate);
       return (1-((endDate - currentDate)/(endDate-startDate)))*100;
@@ -78,7 +129,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
                 title: 'You have been challenged to: ' + $scope.challenge.name,
                 // body: 
                 // ## TODO: don't know how to recieve this
-                data: { redirectTo: '/public-challenges/'+$scope.challenge.$id }
+                data: { challengeId: $scope.challenge.$id }
               });
             });
         }
@@ -107,7 +158,6 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       response.upvotes = 0;
       response.submittedAt = +new Date();
       response.videoUrl = window.video_url || 'no video';
-      
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -168,10 +218,8 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     // };
   }])
 
-  // --- 
   .controller('HomeCtrl', ['$scope', '$timeout', '$location', 'fbutil', 'user', 'FBURL', function($scope, $timeout, $location, fbutil, user, FBURL) {
-    
-    checkForRedirectMessage($location, $scope, $timeout);
+    // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
@@ -296,9 +344,6 @@ function checkForRedirectMessage($location, $scope, $timeout){
       // $timeout(function(){
         console.log('t');
         kik.message.followed = true;
-        
-        alert("testing! 1..2..3");
-
         // $location.path(kik.message.redirectTo);
         // $scope.$apply();
 
