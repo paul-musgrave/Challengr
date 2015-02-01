@@ -48,6 +48,19 @@ body {
   float: left;
   list-style: none;
 }
+.circle-image{
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+  background-size: cover;
+  position: absolute;
+  margin-top: -60px;
+  margin-left: -25px;
+  left: 50%;
+  border: 1px solid #d1d1d1;
+  background-color: #938780;
+}
+
 p.status {
    color: red;
 }
