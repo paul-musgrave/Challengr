@@ -1,0 +1,24 @@
+<h2 style="margin: -190px auto 0px auto;text-align:center;padding:20px 0px 10px 0px; color:#ffffff;text-shadow: 0px -1px 1px #666;">My Challenges</h2>
+
+<!-- hide if no challenges - TODO: have placeholder otherwise -->
+
+<div id="my-challenges" ng-show="challenges.length" style="text-align:center;padding: 0px 20px;">
+
+        <div ng-repeat="challenge in challenges" class="panel panel-default">
+          <div class="panel-heading" style="border-bottom:0px;">
+        <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
+          </div>
+          <div class="panel-body">
+            <!-- <img src="{{challenge.thumbUrl}}" alt=""> -->
+            <div class = "video_cover">
+                <video class = "card_video" width="220" onclick="this.play();" height="120">
+                     <source src="{{challenge.videoUrl}}" />
+                        </video>
+                    </div>
+              <p>{{challenge.startDate}}</p>
+              <p>Upvotes: {{challenge.upvotes}}</p>
+            <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
+              </div>
+        </div>
+
+</div>

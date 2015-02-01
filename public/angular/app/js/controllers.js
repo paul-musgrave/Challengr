@@ -75,7 +75,16 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   }])
 
   .controller('MyChallengesCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
-    
+
+    // ## does this async cause a problem?
+    kik.getUser(function(user){
+      // TEST
+      if(!user.username){user.username = 'placeholder-user'}
+
+      var myChallenges = fbutil.syncArray('users/'+user.username+'/challenged-to', {limit: 10, endAt: null});
+      $scope.challenges = myChallenges;
+    });
+
   }])
 
   .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
