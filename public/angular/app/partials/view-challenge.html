@@ -6,11 +6,12 @@
 	    <h3 class="panel-title">{{challenge.name}}</h3>
 	  </div>
 	  <div class="panel-body" style="margin: 0 auto; text-align:center;">
-	  	<div style="margin-left:-30px;">
-	      <video width="220" onclick="this.play();" height="120" >
-	      	 <source src="{{challenge.videoUrl}}" type="video/quicktime" />
+  		<div class = "video_cover">
+        <video class = "card_video" width="220" onclick="this.play();" height="120">
+        	 <source src="{{challenge.videoUrl}}" type="video/quicktime" />
 				</video>
 			</div>
+			<br />
 	    <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
 	    <p> Start Time : <span>{{challenge.startDate}}</span> </p>
 	    <p>Upvotes: <span class="badge">{{challenge.upvotes}}</span></p>
@@ -21,15 +22,20 @@
 	
 
 	<h3>Responses</h3>
+	<div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">{{response.submittedBy}}</h3>
+	  </div>
+	  <div class="panel-body">
+	  	<div class = "video_cover">
+        <video class = "card_video" width="220" onclick="this.play();" height="120">
+        	 <source src="{{response.videoUrl}}" />
+				</video>
+			</div>
+	    <p> Start Time : <span>{{response.startDate}}</span> </p>
+	    <p>Upvotes: <span class="badge">{{response.upvotes}}</span></p>
+	    <button ng-click="upvote(response.$id)" class = "btn btn-success">Upvote</button>
+	  </div>
+	</div>
 
-	<!-- hide if no responses - TODO: have placeholder otherwise -->
-	<ul id="challenge-reponses">
-	    <li ng-repeat="response in responses">
-	        <ul>
-	            <li>{{response.startDate}}</li>
-	            <li>Upvotes: {{response.upvotes}}</li>
-	        </ul>
-	        <button ng-click="upvote(response.$id)">Upvote</button>
-	    </li>
-	</ul>
 </div>

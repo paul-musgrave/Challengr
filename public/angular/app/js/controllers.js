@@ -73,14 +73,21 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
     $scope.newresponse = {};
 
-    $scope.createResponse = function(response){
+    $scope.createResponse = function(){
       //TODO: validation (on form with angular somehow?)
+
+      var response = {"upvotes": 0, 
+                    "submittedAt":  +new Date(),
+                    "videoUrl": window.video_url || 'no video',
+                    "submittedBy": 'unknown'
+                    };
 
       // TODO: video. also thumbnail
 
       response.upvotes = 0;
       response.submittedAt = +new Date();
       response.videoUrl = window.video_url || 'no video';
+      
 
       // ## for now, just do this kikwise
       kik.getUser(function(user){
@@ -270,6 +277,8 @@ function checkForRedirectMessage($location, $scope, $timeout){
         console.log('t');
         kik.message.followed = true;
         
+        alert("testing! 1..2..3");
+
         // $location.path(kik.message.redirectTo);
         // $scope.$apply();
 

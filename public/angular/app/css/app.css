@@ -4,6 +4,9 @@ body {
   margin: 10px;
 }
 
+
+
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -67,4 +70,14 @@ fieldset {
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+}
+.video_cover {
+  padding:2px;
+  background-size: contain;
+  background-position: center;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  width: 220px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
 }
