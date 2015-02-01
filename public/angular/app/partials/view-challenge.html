@@ -14,12 +14,17 @@
 			<br />
 	    <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
 	    <p> Start Time : <span>{{challenge.startDate}}</span> </p>
+	    
+
 	    <p>Upvotes: <span class="badge">{{challenge.upvotes}}</span></p>
 	   <button ng-click="share()" class = "btn btn-success" style="float:right;">Share</button>
 	  </div>
 
 	</div>
 	
+	<script>
+		
+	</script>
 
 	<h3>Responses</h3>
 	<div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses">

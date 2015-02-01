@@ -4,8 +4,9 @@ body {
   margin: 10px;
 }
 
-
-
+.countdown {
+  width: 300px;
+}
 
 .menu {
   list-style: none;
