@@ -103,3 +103,13 @@ fieldset {
   margin: 0 auto;
   background-repeat: no-repeat;
 }
+
+.upvote {
+  float: right;
+  margin-top: -266px;
+}
+.upvote-count {
+  float: right;
+  margin-top: -256px;
+  margin-right: 54px;
+}

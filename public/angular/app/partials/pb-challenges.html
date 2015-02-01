@@ -32,8 +32,8 @@
 				    <span class="sr-only">{{get_completion(challenge.startDate)*100}}% Complete</span>
 				  </div>
 				</div>
-        <p>Upvotes: {{challenge.upvotes}}</p>
-        <button ng-click="upvote(challenge.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up"></button>
+        <p class="upvote-count">{{challenge.upvotes}}</p>
+        <button ng-click="upvote(challenge.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up upvote"></button>
 			</div>
 		</div>
 
@@ -75,13 +75,16 @@
              <source src="{{response.videoUrl}}" />
                 </video>
             </div>
-        <div class="progress">
+        <!-- <div class="progress">
                   <div class="progress-bar" role="progressbar" aria-valuenow="{{get_completion(challenge.startDate)}}" aria-valuemin="0" aria-valuemax="1" style="width: {{get_completion(challenge.startDate)*100}}%;">
                     <span class="sr-only">{{get_completion(challenge.startDate)*100}}% Complete</span>
                   </div>
         </div>
+        <p class="upvote-count">{{response.upvotes}}</p>
+        <button ng-click="upvote(response.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up upvote"></button> -->
+        <p> Start Time : <span>{{response.startDate}}</span> </p>
         <p>Upvotes: <span class="badge">{{response.upvotes}}</span></p>
-        <button ng-click="upvote(response.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up">Upvote</button>
+        <button ng-click="upvote(response.$id)" class = "btn btn-success">Upvote</button>
       </div>
     </div>
 

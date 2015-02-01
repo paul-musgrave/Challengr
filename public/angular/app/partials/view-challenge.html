@@ -40,8 +40,12 @@
 				</video>
 			</div>
 	    <p> Start Time : <span>{{response.startDate}}</span> </p>
-	    <p>Upvotes: <span class="badge">{{response.upvotes}}</span></p>
-	    <button ng-click="upvote(response.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up">Upvote</button>
+    
+        <p>Upvotes: <span class="badge">{{response.upvotes}}</span></p>
+        <button ng-click="upvote(response.$id)" class = "btn btn-success">Upvote</button>
+
+        <!-- <p class="upvote-count">{{response.upvotes}}</p>
+        <button ng-click="upvote(response.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up upvote"></button> -->
 	  </div>
 	</div>
 

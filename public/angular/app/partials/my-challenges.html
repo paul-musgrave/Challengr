@@ -16,8 +16,11 @@
                         </video>
                     </div>
               <p>{{challenge.startDate}}</p>
-              <p>Upvotes: {{challenge.upvotes}}</p>
-            <button ng-click="upvote(challenge.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up">Upvote</button>
+
+            <p>Upvotes: {{challenge.upvotes}}</p>
+            <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
+              <!-- <p class="upvote-count">{{challenge.upvotes}}</p>
+              <button ng-click="upvote(challenge.$id)" class = "btn btn-success glyphicon glyphicon-arrow-up upvote" ></button> -->
               </div>
         </div>
 
