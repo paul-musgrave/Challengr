@@ -1,10 +1,15 @@
-<h2 style="margin: -180px auto 0px auto;text-align:center;padding:20px 0px;color:#ffffff;text-shadow: 0px -1px 1px #666;">Public Challenges</h2>
+<h2 style="margin: -190px auto 0px auto;text-align:center;padding:20px 0px 10px 0px; color:#ffffff;text-shadow: 0px -1px 1px #666;">Public Challenges</h2>
+<h4 style="margin: 0px auto 10px auto;text-align:center;color:#ffffff;text-shadow: 0px -1px 1px #666;">Sort Options</h4>
+<ul class="breadcrumb" style="opacity:0.8;width:70%;margin: 0px auto 10px auto;margin-bottom:2
+40px;text-align:center;">
+	<li ng-repeat="option in sortOptions" ng-click="setSort (option)" ><a>{{option}}</a></li>
+</ul>
 
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
 
 <div id="pb-challenges" ng-show="publicc.length" style="text-align:center;padding: 0px 20px;">
 
-		<div ng-repeat="challenge in publicc" class="panel panel-default">
+		<div ng-repeat="challenge in publicc | orderBy: sort | reverse" class="panel panel-default">
 		  <div class="panel-heading" style="border-bottom:0px;">
         <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
@@ -22,6 +27,7 @@
 		</div>
 
 </div>
+
 
 <style>
 	.video_cover {

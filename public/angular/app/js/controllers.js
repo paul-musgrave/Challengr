@@ -16,6 +16,12 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
+    
+    $scope.sortOptions = ["upvotes", "startDate"];
+    $scope.sort = "upvotes";
+    $scope.setSort = function(type) { $scope.sort = type; };
+
+
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
     //     $scope.messages.$add({text: newMessage});
