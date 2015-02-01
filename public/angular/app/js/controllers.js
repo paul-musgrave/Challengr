@@ -5,7 +5,7 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
-kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
+// kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
 
 /* Controllers */
 
