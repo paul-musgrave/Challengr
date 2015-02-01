@@ -7,6 +7,7 @@
   <title>Challengr</title>
   <meta name="description" content="">
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <link rel="kik-icon" href="img/challengr_icon.png">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="css/bootstrap.css"/>
@@ -18,34 +19,16 @@
   <script src="js/flipclock.min.js"></script>
 </head>
 <body ng-cloak>
-  <nav class="navbar navbar-default navbar-fixed-top" style="opacity:0.75;">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">kik challengr</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="overflow:hidden;max-height:61px;">
-        <ul class="nav navbar-nav list-inline inline-menu">
-          <li class="">
-            <a id="public-challenges-button" type="button" href="#/public-challenges">Public</a>
-          </li>
-          <li>
-            <a type="button" href="#/create-challenge" >New</a>
-          </li>
-          <li>
-            <a type="button" href="#/my-challenges">My Challenges</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <nav class="navbar navbar-default navbar-fixed-top row" style="opacity:0.75;padding:5px 20px 0px 20px;text-align:center;">
+    <a id="public-challenges-button" style="height:100%;" type="button" href="#/public-challenges" class = "btn btn-primary col-xs-4">
+      Public
+    </a>
+    <a type="button" href="#/create-challenge" class = "btn btn-primary col-xs-4">
+      New 
+    </a>
+    <a type="button" href="#/my-challenges" class = " btn btn-primary col-xs-4">
+      Profile
+    </a>
   </nav>
 
  
@@ -61,7 +44,7 @@
       background: url(img/challengr_background2.jpg);
       background-size: cover;
       background-position: bottom;
-      height:290px;
+      height:260px;
       width: 100%;
     }
   </style>

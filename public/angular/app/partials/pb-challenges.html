@@ -1,11 +1,13 @@
 
 <div ng-hide="fromShare">
-<h2 style="margin: -190px auto 0px auto;text-align:center;padding:20px 0px 10px 0px; color:#ffffff;text-shadow: 0px -1px 1px #666;">Be Brave.</h2>
+<h2 style="margin: -190px auto 0px auto;text-align:center;padding:20px 0px 10px 0px; color:#ffffff;text-shadow: 0px -1px 1px #666;">Challengr</h2>
 <h4 style="margin: 0px auto 10px auto;text-align:center;color:#ffffff;text-shadow: 0px -1px 1px #666;">Send Your Friends Video Challenges</h4>
 
 <ul class="breadcrumb" style="opacity:0.8;width:70%;margin: 0px auto 10px auto;margin-bottom:2
 40px;text-align:center;">
-	<li ng-repeat="option in sortOptions" ng-click="setSort (option)" ><a>{{option}}</a></li>
+	<p>Sort By : </p>
+	<li ng-click="setSort ('upvotes')" ><a>Popularity</a></li>
+	<li ng-click="setSort ('startDate')" ><a>Most Recent</a></li>
 </ul>
 
 <!-- hide if no challenges - TODO: have placeholder otherwise -->
@@ -19,15 +21,20 @@
         <h2 class="panel-title"><a ng-href="#/challenge/{{challenge.$id}}">{{challenge.name}}</a></h2>
 		  </div>
 		  <div class="panel-body">
-	        <div class = "video_cover">
-		        <video class = "card_video" width="220" onclick="this.play();" height="120">
-		        	 <source src="{{challenge.videoUrl}}" />
-						</video>
-					</div>
-	          <p>{{challenge.startDate}}</p>
-	          <p>Upvotes: {{challenge.upvotes}}</p>
-	        <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
-			  </div>
+        <div class = "video_cover">
+	        <video class = "card_video" width="220" onclick="this.play();" height="120">
+	        	 <source src="{{challenge.videoUrl}}" />
+					</video>
+				</div>
+				<br />
+        <div class="progress">
+				  <div class="progress-bar" role="progressbar" aria-valuenow="{{get_completion(challenge.startDate)}}" aria-valuemin="0" aria-valuemax="1" style="width: {{get_completion(challenge.startDate)*100}}%;">
+				    <span class="sr-only">{{get_completion(challenge.startDate)*100}}% Complete</span>
+				  </div>
+				</div>
+        <p>Upvotes: {{challenge.upvotes}}</p>
+        <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
+			</div>
 		</div>
 
 </div>

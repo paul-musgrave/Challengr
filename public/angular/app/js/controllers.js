@@ -16,11 +16,35 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
-    $scope.sortOptions = ["upvotes", "startDate"];
     $scope.sort = "upvotes";
     $scope.setSort = function(type) { $scope.sort = type; };
 
-    $scope.usr_thumbnails = [];
+    $scope.getEndDate = function (startDate) {
+      var start_time = new Date(startDate);
+      return start_time.setDate(start_time.getDate()+2);
+    }
+
+    $scope.getTimeRemaining = function (startDate,currentDate){
+      var percentage_complete = $scope.percent_complete(startDate,currentDate);
+      return Math.round(48*(1-percentage_complete));
+    }
+
+    $scope.percent_complete = function (startDate,currentDate){
+      var endDate = $scope.getEndDate(startDate);
+      return 1 - (endDate - currentDate)/(endDate-startDate);
+    }
+
+    $scope.get_completion = function (startDate){
+      var currentDate = + new Date();
+      return $scope.percent_complete(startDate,currentDate);
+    }
+
+    $scope.upvote = function(responseId){
+      var response = fbutil.ref(path+'/responses/'+responseId);
+      response.child('upvotes').transaction(function(curUpvotes){
+        return curUpvotes+1;
+      });
+    }
 
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
@@ -98,17 +122,17 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
     $scope.getEndDate = function (startDate) {
       var start_time = new Date(startDate);
-      var end_time = new Date();
-      return + end_time.setDate(start_time.getDate()+2);
+      return start_time.setDate(start_time.getDate()+2);
     }
 
     $scope.getTimeRemaining = function (startDate,currentDate){
       var percentage_complete = $scope.percent_complete(startDate,currentDate);
-      return Math.round(48*(1 - percentage_complete/100));
+      return Math.round(48*(1-percentage_complete));
     }
+
     $scope.percent_complete = function (startDate,currentDate){
       var endDate = $scope.getEndDate(startDate);
-      return (1-((endDate - currentDate)/(endDate-startDate)))*100;
+      return 1 - (endDate - currentDate)/(endDate-startDate);
     }
 
     $scope.upvote = function(responseId){

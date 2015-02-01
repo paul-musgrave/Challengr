@@ -15,10 +15,10 @@
 	    <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
 
 	    <p><span>{{getTimeRemaining(challenge.startDate,currentTime)}} hours remaining</span> </p>
-    
+    	
     	<div class="progress">
-			  <div class="progress-bar" role="progressbar" aria-valuenow="{{currentTime}}" aria-valuemin="{{challenge.startDate}}" aria-valuemax="{{getEndDate(challenge.startDate)}}" style="width: {{percent_complete(challenge.startDate,currentTime,getEndDate(challenge.startDate))}}%;">
-			    <span class="sr-only">{{percent_complete(challenge.startDate,currentTime)}}% Complete</span>
+			  <div class="progress-bar" role="progressbar" aria-valuenow="{{percent_complete(challenge.startDate,currentTime)}}" aria-valuemin="0" aria-valuemax="1" style="width: {{percent_complete(challenge.startDate,currentTime)*100}}%;">
+			    <span class="sr-only">{{percent_complete(challenge.startDate,currentTime)*100}}% Complete</span>
 			  </div>
 			</div>
 
