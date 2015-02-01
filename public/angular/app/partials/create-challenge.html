@@ -42,7 +42,7 @@
 			  	  <b>Private:</b>
 			  	</div>
 			  	<div class = "col-sm-9">
-			  		<input type="checkbox" ng-model="newchallenge.isPrivate" />
+			  		<input type="checkbox" name= "switch" data-size = "small" ng-model="newchallenge.isPrivate" />
 			  	</div>
 			  </div>
 
@@ -78,6 +78,7 @@
 	
 	$(function(){
 		
+		$("[name='switch']").bootstrapSwitch();
 
 		$('#video_file').change(function() {
 		  $("#video_form").submit();
