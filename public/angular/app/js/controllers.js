@@ -21,6 +21,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     $scope.sort = "upvotes";
     $scope.setSort = function(type) { $scope.sort = type; };
 
+    $scope.usr_thumbnails = [];
 
     // $scope.addMessage = function(newMessage) {
     //   if( newMessage ) {
@@ -79,7 +80,8 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       var response = {"upvotes": 0, 
                     "submittedAt":  +new Date(),
                     "videoUrl": window.video_url || 'no video',
-                    "submittedBy": 'unknown'
+                    "submittedBy": 'unknown',
+                    "thumbUrl" : "unkown"
                     };
 
       // TODO: video. also thumbnail
@@ -96,7 +98,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         //   alert('You need to login to submit a challenge!');
         // } else {
           response.submittedBy = user.username || 'unknown';
-
+          response.thumbUrl = user.thumbnail;
           responsesRef.push(response, function(){
             ///TODO
             console.log('submitted!');
@@ -131,7 +133,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         //   alert('You need to login to submit a challenge!');
         // } else {
           // challengeData.submittedBy = user.username ;
-
+          challengeData.thumbUrl = user.thumbnail;
           publicChallengesRef.push(challengeData, function(){
             ///TODO
             console.log('submitted!');
