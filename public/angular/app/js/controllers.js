@@ -5,7 +5,7 @@ if(kik && !kik.getUser){
   kik.getUser = function(cb){cb({})}
 }
 
-// kik.message = { redirectTo: '/create-challenge'};
+kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
 
 /* Controllers */
 
@@ -13,7 +13,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('PBChallengesCtrl', ['$scope', '$timeout', '$location', 'publicChallengeList', 'fbutil', function($scope, $timeout, $location, publicChallengeList, fbutil) {
     
-    checkForRedirectMessage($location, $scope, $timeout);
+    // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
     
@@ -35,7 +35,8 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     }
 
     // HACK: duplicate
-    if(kik.message){
+    if(kik.message && !kik.message.followed){
+      kik.message.followed = true;
       $scope.fromShare = true;
 
       var path = 'public-challenges/'+kik.message.challengeId;
@@ -186,7 +187,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   // --- 
   .controller('HomeCtrl', ['$scope', '$timeout', '$location', 'fbutil', 'user', 'FBURL', function($scope, $timeout, $location, fbutil, user, FBURL) {
     
-    checkForRedirectMessage($location, $scope, $timeout);
+    // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope.syncedValue = fbutil.syncObject('syncedValue');
     $scope.user = user;
