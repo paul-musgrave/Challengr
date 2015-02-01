@@ -13,18 +13,20 @@
 			</div>
 			<br />
 	    <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
-	    <p> Start Time : <span>{{challenge.startDate}}</span> </p>
-	    
+
+	    <p><span>{{getTimeRemaining(challenge.startDate,currentTime)}} hours remaining</span> </p>
+    
+    	<div class="progress">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="{{currentTime}}" aria-valuemin="{{challenge.startDate}}" aria-valuemax="{{getEndDate(challenge.startDate)}}" style="width: {{percent_complete(challenge.startDate,currentTime,getEndDate(challenge.startDate))}}%;">
+			    <span class="sr-only">{{percent_complete(challenge.startDate,currentTime)}}% Complete</span>
+			  </div>
+			</div>
 
 	    <p>Upvotes: <span class="badge">{{challenge.upvotes}}</span></p>
+
 	   <button ng-click="share()" class = "btn btn-success" style="float:right;">Share</button>
 	  </div>
-
 	</div>
-	
-	<script>
-		
-	</script>
 
 	<h3>Responses</h3>
 	<div class="panel panel-default" style = "text-align:center;" ng-repeat="response in responses">

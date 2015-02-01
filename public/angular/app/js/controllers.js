@@ -39,8 +39,26 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
     // ## hack
     var path = 'public-challenges/'+$routeParams['challengeId'];
-    $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});;
+    $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});
     $scope.responses = fbutil.syncArray(path+'/responses', {limit: 10, endAt: null});
+
+    $scope.currentTime = + new Date();
+    $scope.endingTime = new Date($scope.currentTime);
+
+    $scope.getEndDate = function (startDate) {
+      var start_time = new Date(startDate);
+      var end_time = new Date();
+      return + end_time.setDate(start_time.getDate()+2);
+    }
+
+    $scope.getTimeRemaining = function (startDate,currentDate){
+      var percentage_complete = $scope.percent_complete(startDate,currentDate);
+      return Math.round(48*(1 - percentage_complete/100));
+    }    
+    $scope.percent_complete = function (startDate,currentDate){
+      var endDate = $scope.getEndDate(startDate);
+      return (1-((endDate - currentDate)/(endDate-startDate)))*100;
+    }
 
     $scope.upvote = function(responseId){
       var response = fbutil.ref(path+'/responses/'+responseId);
