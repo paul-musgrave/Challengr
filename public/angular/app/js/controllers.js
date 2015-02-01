@@ -74,6 +74,10 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   }])
 
+  .controller('MyChallengesCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
+    
+  }])
+
   .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
     // ## hack
     var path = 'public-challenges/'+$routeParams['challengeId'];
