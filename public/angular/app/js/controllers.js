@@ -210,7 +210,10 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         // if(!user){
         //   alert('You need to login to submit a challenge!');
         // } else {
-          // challengeData.submittedBy = user.username ;
+          // TEST
+          if(!user.username){user.username = 'placeholder-user'}
+
+          challengeData.submittedBy = user.username;
           challengeData.thumbUrl = user.thumbnail || 'no thumbnail';
           publicChallengesRef.push(challengeData, function(){
             ///TODO
