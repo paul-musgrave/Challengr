@@ -36,7 +36,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
     $scope.get_completion = function (startDate){
       var currentDate = + new Date();
-      return $scope.percent_complete(startDate,currentDate);
+      return Math.round($scope.percent_complete(startDate,currentDate)*100)/100;
     }
 
     $scope.upvote = function(responseId){
