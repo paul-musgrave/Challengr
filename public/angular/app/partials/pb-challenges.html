@@ -50,10 +50,9 @@
       </div>
       <div class="panel-body" style="margin: 0 auto; text-align:center;">
         <div class = "video_cover">
-        <video class = "card_video" width="220" onclick="this.play();" height="120">
-             <source src="{{challenge.videoUrl}}" type="video/quicktime" />
-                </video>
-            </div>
+          <video ng-src="{{challenge.videoUrl}}" class = "card_video" width="220" onclick="this.play();" height="120">
+          </video>
+        </div>
             <br />
         <a ng-href="#/challenge/{{challenge.$id}}/respond">Respond to this challenge!</a>
         <p> Start Time : <span>{{challenge.startDate}}</span> </p>

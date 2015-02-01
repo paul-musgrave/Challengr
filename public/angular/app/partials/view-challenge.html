@@ -7,9 +7,8 @@
 	  </div>
 	  <div class="panel-body" style="margin: 0 auto; text-align:center;">
   		<div class = "video_cover">
-        <video class = "card_video" width="220" onclick="this.play();" height="120">
-        	 <source src="{{challenge.videoUrl}}" type="video/quicktime" />
-				</video>
+        <video ng-src="{{challenge.videoUrl}}" id = "video_challenge" class = "card_video" width	="220" onclick="this.play();" height="120">
+ 				</video>
 			</div>
 			<br />
 	    <a ng-href="#/challenge/{{challenge.$id}}/respond" class="btn btn-primary">Respond to this challenge!</a>

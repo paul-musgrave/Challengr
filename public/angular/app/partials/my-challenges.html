@@ -13,9 +13,9 @@
             <div class = "video_cover">
                 <video class = "card_video" width="220" onclick="this.play();" height="120">
                      <source src="{{challenge.videoUrl}}" />
-                        </video>
-                    </div>
-              <p>{{challenge.startDate}}</p>
+                </video>
+            </div>
+            <p>{{challenge.startDate}}</p>
 
             <p>Upvotes: {{challenge.upvotes}}</p>
             <button ng-click="upvote(challenge.$id)" class = "btn btn-success">Upvote</button>
