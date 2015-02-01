@@ -43,8 +43,18 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
       $scope.fromShare = true;
 
       var path = 'public-challenges/'+kik.message.challengeId;
-      $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});;
+      $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});
       $scope.responses = fbutil.syncArray(path+'/responses', {limit: 10, endAt: null});
+
+      kik.getUser(function(user){
+
+        //TEST
+        if(!user.username){user.username = 'placeholder-user'}
+
+        fbutil.ref(path).once('value', function(v){
+          fbutil.ref('users/'+user.username+'/challenged-to/'+kik.message.challengeId).set(v.val());
+        });
+      });
 
       $scope.upvote = function(responseId){
         var response = fbutil.ref(path+'/responses/'+responseId);
