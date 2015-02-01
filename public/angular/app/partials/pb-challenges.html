@@ -75,6 +75,13 @@
 </div>
 </div>
 
-
+<!-- ## additional share hack -->
+<script>
+    $('#public-challenges-button').on('click', function(){
+        window.pcscope.fromShare = false;
+        window.pcscope.upvote = window.pcscope.chupvote;
+        window.pcscope.$apply();
+    });
+</script>
 
 <!-- todo: create -->

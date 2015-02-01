@@ -12,7 +12,7 @@ kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
 angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
 
   .controller('PBChallengesCtrl', ['$scope', '$timeout', '$location', 'publicChallengeList', 'fbutil', function($scope, $timeout, $location, publicChallengeList, fbutil) {
-    
+
     // checkForRedirectMessage($location, $scope, $timeout);
 
     $scope["publicc"] = publicChallengeList;
@@ -27,12 +27,15 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
     //     $scope.messages.$add({text: newMessage});
     //   }
     // };
-    $scope.upvote = function(challengeId){
+    $scope.chupvote = $scope.upvote = function(challengeId){
       var challenge = fbutil.ref('public-challenges').child(challengeId);
       challenge.child('upvotes').transaction(function(curUpvotes){
         return curUpvotes+1;
       });
     }
+
+    // more hack
+    window.pcscope = $scope;
 
     // HACK: duplicate
     if(kik.message && !kik.message.followed){
