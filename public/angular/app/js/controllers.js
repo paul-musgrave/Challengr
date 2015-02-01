@@ -33,6 +33,41 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
         return curUpvotes+1;
       });
     }
+
+    // HACK: duplicate
+    if(kik.message){
+      $scope.fromShare = true;
+
+      var path = 'public-challenges/'+kik.message.challengeId;
+      $scope.challenge = fbutil.syncObject(path, {limit: 10, endAt: null});;
+      $scope.responses = fbutil.syncArray(path+'/responses', {limit: 10, endAt: null});
+
+      $scope.upvote = function(responseId){
+        var response = fbutil.ref(path+'/responses/'+responseId);
+        response.child('upvotes').transaction(function(curUpvotes){
+          return curUpvotes+1;
+        });
+      }
+
+      $scope.share = function(){
+        kik.pickUsers(function(users){
+          if(!users){
+              // action was cancelled by user
+          } else {
+              users.forEach(function(user){
+                kik.send(user.username, {
+                  // TODO: message content
+                  title: 'You have been challenged to: ' + $scope.challenge.name,
+                  // body: 
+                  // ## TODO: don't know how to recieve this
+                  data: { challengeId: $scope.challenge.$id }
+                });
+              });
+          }
+        });
+      }
+    }
+
   }])
 
   .controller('ChallengeCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
@@ -59,7 +94,7 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
                 title: 'You have been challenged to: ' + $scope.challenge.name,
                 // body: 
                 // ## TODO: don't know how to recieve this
-                data: { redirectTo: '/public-challenges/'+$scope.challenge.$id }
+                data: { challengeId: $scope.challenge.$id }
               });
             });
         }
