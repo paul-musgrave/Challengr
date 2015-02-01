@@ -1,9 +1,11 @@
 'use strict';
 
-// DEV: empty user when not in kik
+// DEV: placeholder user when not in kik
 if(kik && !kik.getUser){
-  kik.getUser = function(cb){cb({})}
+  kik.getUser = function(cb){cb({username:'placeholder-user'})}
 }
+
+setUser();
 
 // kik.message = { challengeId: '-JgygzXxy5umT9fpcaEe'};
 
@@ -174,11 +176,13 @@ angular.module('myApp.controllers', ['firebase.utils', 'simpleLogin'])
   .controller('ResponseCtrl', ['$scope', '$routeParams', '$location', 'fbutil', function($scope, $routeParams, $location, fbutil) {
     // ## always public
     var responsesRef = fbutil.ref('public-challenges/'+$routeParams['challengeId']+'/responses');
+    var userCompletedRef = fbutil.ref('users/'+window.kikuser.username+'/completed-challenges');
 
     $scope.createResponse = function(){
       responsesRef.push(createResponseObject(), function(){
         $location.path('/public-challenges');
       });
+      userCompletedRef.child($routeParams['challengeId']).set(true);
     };
   }])
 
